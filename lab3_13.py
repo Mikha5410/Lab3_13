@@ -84,12 +84,32 @@ Yung(slit2)
 Yung(slit3)
 Yung(slit4)
 
-h_av, delta_h  = deviation_count(h)
+Coher_wid, delta_wid  = deviation_count(h)
 
+
+
+
+cols=[0,1]
+data = pd.read_excel('lab13.xlsx', sheet_name = 'D', usecols = cols)
+data.head()
+low_dissapear= data['low'].tolist()
+low_dissapear = list(map(float, low_dissapear))
+high_dissapear= data['high'].tolist()
+high_dissapear = list(map(float, high_dissapear))
+Len_difference = []
+
+listcoher = []
+for val in (range(len(low_dissapear))):
+  Len_difference.append(abs(high_dissapear[val]-low_dissapear[val]))
+  listcoher.append(Len_difference[val]/5)
+print(low_dissapear, high_dissapear, Len_difference, listcoher)
+Coher_len, delta_len = deviation_count(listcoher)
 
 print("\nШирина когерентности равна")
-print(f"{h_av*10**3:.2f}\u00B1{delta_h*10**3:.2f} mm")
+print(f"{Coher_len*10**3:.2f}\u00B1{delta_len*10**3:.2f} mm")
 
+print("\nДлина когерентности равна")
+print(f"{Coher_wid*10**3:.2f}\u00B1{delta_wid*10**3:.2f} mm")
 
 
 
